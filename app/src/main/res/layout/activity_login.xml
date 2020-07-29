@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="100dp"
+        android:text="Find"
+        android:textColor="#813BCA"
+        android:textSize="175px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="95dp"
+        android:text="Real"
+        android:textColor="#5B42D9"
+        android:textSize="175px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imview_login_path"
+        android:layout_width="0dp"
+        android:layout_height="256dp"
+        android:contentDescription="login_path"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/login_path" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Deepfake Detection Application"
+        android:textAlignment="center"
+        android:textColor="#B1A6CC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imbtn_google"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="150dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:srcCompat="@drawable/signin_google" />
+
+    <ImageButton
+        android:id="@+id/imbtn_kakao"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imbtn_google"
+        app:srcCompat="@drawable/signin_kakao" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="13dp"
+        android:alpha="0.8"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/imbtn_google"
+        app:layout_constraintStart_toStartOf="@+id/imbtn_google"
+        app:layout_constraintTop_toTopOf="@+id/imbtn_google"
+        app:srcCompat="@drawable/google_icon" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="13dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.8"
+        android:cropToPadding="false"
+        android:foregroundTint="#FFFFFF"
+        android:scaleType="centerCrop"
+        android:tint="#FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/imbtn_kakao"
+        app:layout_constraintStart_toStartOf="@+id/imbtn_kakao"
+        app:layout_constraintTop_toTopOf="@+id/imbtn_kakao"
+        app:srcCompat="@drawable/카톡로고" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
