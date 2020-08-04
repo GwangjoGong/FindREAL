@@ -109,6 +109,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/imbtn_kakao"
         app:layout_constraintStart_toStartOf="@+id/imbtn_kakao"
         app:layout_constraintTop_toTopOf="@+id/imbtn_kakao"
-        app:srcCompat="@drawable/카톡로고" />
+        app:srcCompat="@drawable/kakao_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
