@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="930px"
-        android:layout_height="470px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/news_thumbnail"/>
 
     <TextView
-        android:layout_width="930px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
+        android:layout_marginTop="3dp"
         android:id="@+id/news_title"
         android:text="News Title 1"
         android:fontFamily="@font/nunitosans_regular"
         android:textColor="#0B0F34"
         android:textSize="24sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="3dp"
+        android:background="#0B0F34"/>
 
 </LinearLayout>

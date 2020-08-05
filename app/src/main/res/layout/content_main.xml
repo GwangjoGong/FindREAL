@@ -36,38 +36,130 @@
                     android:textSize="28sp"
                     android:textColor="#B1A6CC"
                     android:fontFamily="@font/montserrat_regular"/>
+
             </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_app_bar"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/main_app_bar">
 
         <LinearLayout
-            android:id="@+id/requests"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginBottom="30dp"
-            android:background="#141B50"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_app_bar">
+
+            <LinearLayout
+                android:id="@+id/requests"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="30dp"
+                android:background="#141B50"
+                android:orientation="horizontal"
+                android:clickable="true">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:id="@+id/requests_piechart">
+
+                </com.github.mikephil.charting.charts.PieChart>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="start">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ongoing_circle"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:id="@+id/ongoing_requests"
+                            android:text="@string/count_ongoing"
+                            android:textColor="#B1A6CC"
+                            android:fontFamily="@font/nunitosans_light"
+                            android:textSize="18sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="start">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/completed_circle"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:id="@+id/completed_requests"
+                            android:text="@string/count_completed"
+                            android:textColor="#B1A6CC"
+                            android:fontFamily="@font/nunitosans_light"
+                            android:textSize="18sp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="News"
+                android:textSize="30sp"
+                android:textColor="#B1A6CC"
+                android:fontFamily="@font/montserrat_light"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="3dp"
+                android:background="#B1A6CC"/>
+            
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/news_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/news_listview"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="#141B50">
-
-        </ListView>
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

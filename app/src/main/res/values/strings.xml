@@ -5,4 +5,6 @@
     <string name="services">Services</string>
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
+    <string name="count_ongoing">1 Ongoing Request</string>
+    <string name="count_completed">2 Completed Requests</string>
 </resources>
