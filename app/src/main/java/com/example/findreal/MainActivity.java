@@ -7,7 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toolbar;
+
+import com.google.android.material.navigation.NavigationView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -26,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Hide Navigation Bar - doesn't work well
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         // Piechart for requests
         PieChart requestPieChart = (PieChart)findViewById(R.id.requests_piechart);
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(0f);
 
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(new int[] {getResources().getColor(R.color.completed), getResources().getColor(R.color.ongoing)});
 
         PieData data = new PieData((dataSet));
         data.setValueTextSize(0f);

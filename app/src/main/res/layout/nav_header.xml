@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:background="#22264C"
-    android:gravity="center_vertical"
+    android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="30dp"
+    android:paddingBottom="30dp"
     >
 
     <LinearLayout
@@ -34,8 +35,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="Username"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textColor="#A7A7A7"
+                android:fontFamily="@font/nunitosans_light"
                 />
 
             <TextView
@@ -44,8 +46,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="e-mail@kaist.ac.kr"
-                android:textSize="16sp"
-                android:textColor="#A7A7A7"/>
+                android:textSize="18sp"
+                android:textColor="#A7A7A7"
+                android:fontFamily="@font/nunitosans_light"/>
 
         </LinearLayout>
     </LinearLayout>

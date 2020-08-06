@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Style_MenuItem">
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
 </resources>

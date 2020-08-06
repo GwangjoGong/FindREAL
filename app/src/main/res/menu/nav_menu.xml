@@ -4,21 +4,24 @@
     <group>\
         <item
             android:id="@+id/menu_mypage"
-            app:actionLayout="@layout/mypage_btn"
-            app:showAsAction="always"
-            android:title=""
+            android:icon="@drawable/mypage_icon"
+            android:title="@string/my_page"
             />
         <item
             android:id="@+id/menu_info"
-            android:title="@string/info" />
+            android:title="@string/info"
+            android:icon="@drawable/info_icon"/>
         <item
             android:id="@+id/menu_services"
-            android:title="@string/services"/>
+            android:title="@string/services"
+            android:icon="@drawable/services_icon"/>
         <item
             android:id="@+id/menu_settings"
-            android:title="@string/settings"/>
+            android:title="@string/settings"
+            android:icon="@drawable/settings_icon"/>
         <item
             android:id="@+id/menu_logout"
-            android:title="@string/logout"/>
+            android:title="@string/logout"
+            android:icon="@drawable/logout_icon"/>
     </group>
 </menu>

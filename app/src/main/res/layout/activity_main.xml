@@ -9,19 +9,24 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <include
-        layout="@layout/content_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:background="@drawable/menu_background_color"
+        app:itemTextAppearance="@style/Style_MenuItem"
+        app:itemTextColor="#B8B7B7"
+        app:itemIconPadding="15dp"
+        app:itemIconSize="28dp"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
         />
+
+    <include
+        layout="@layout/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
