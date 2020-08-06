@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         requestPieChart.getLegend().setEnabled(false);
         requestPieChart.setExtraOffsets(0,0,0,0);
 
-        requestPieChart.setDragDecelerationFrictionCoef(0.5f);
+        requestPieChart.setTouchEnabled(false);
 
         requestPieChart.setDrawHoleEnabled(false);
         requestPieChart.setHoleColor(Color.WHITE);
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         yValues.add(new PieEntry(2f,""));
         yValues.add(new PieEntry(1f,""));
-
 
         PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(0f);
