@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="675dp"
+        android:background="#22264C"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="41dp"
+        android:layout_height="27dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="@+id/toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:srcCompat="@drawable/backbutton" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="56dp"
+        android:background="#747BBC"
+        android:backgroundTint="#747BBC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_BEGGINER_1" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="56dp"
+        android:background="#747BBC"
+        android:backgroundTint="#747BBC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_BIGINNER_4" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="56dp"
+        android:background="#747BBC"
+        android:backgroundTint="#747BBC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_BEGGINER_3" />
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="56dp"
+        android:background="#747BBC"
+        android:backgroundTint="#747BBC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_BEGGINER_2" />
+
+    <TextView
+        android:id="@+id/text_SERVICE_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Services"
+        android:textColor="#B1A6CC"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+
+    <TextView
+        android:id="@+id/text_BEGGINER"
+        android:layout_width="0dp"
+        android:layout_height="198.85dp"
+        android:background="#747BBC"
+        android:fontFamily="@font/comfortaa_regular"
+        android:gravity="center"
+        android:text="Beginner"
+        android:textColor="#151A46"
+        android:textSize="64sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+
+    <TextView
+        android:id="@+id/text_BEGGINER_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="3 images per week"
+        android:textColor="#B4BBFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_BEGGINER" />
+
+    <TextView
+        android:id="@+id/text_BEGGINER_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="Refresh requests every week"
+        android:textColor="#B4BBFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/text_BEGGINER_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="Other service 1"
+        android:textColor="#B4BBFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view7" />
+
+    <TextView
+        android:id="@+id/text_BIGINNER_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="Other service 2"
+        android:textColor="#B4BBFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <ImageView
+        android:id="@+id/beginner_cost"
+        android:layout_width="201dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:srcCompat="@drawable/beginner_Price" />
+
+    <ImageButton
+        android:id="@+id/beginner_pay"
+        android:layout_width="237dp"
+        android:layout_height="84dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beginner_cost"
+        app:srcCompat="@drawable/beginner_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

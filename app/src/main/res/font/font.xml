@@ -32,4 +32,5 @@
         android:fontStyle="normal"
         android:fontWeight="400"
         android:font="@font/roboto_light"/>
+        android:font="@font/comfortaa_regular"/>
 </font-family>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="675dp"
+        android:background="#22264C"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="41dp"
+        android:layout_height="27dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="@+id/toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:srcCompat="@drawable/backbutton" />
+
+    <TextView
+        android:id="@+id/text_SETTINGS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Settings"
+        android:textColor="#B1A6CC"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_SETTINGS_1"
+        android:layout_width="385dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+
+        <TextView
+            android:id="@+id/category1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Category 1"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch1-1"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 1"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch1-2"
+            style="@style/SettingContextSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 2"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch1-3"
+            style="@style/SettingContextSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 3"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_SETTINGS_2"
+        android:layout_width="385dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_SETTINGS_1">
+
+        <TextView
+            android:id="@+id/category2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Category 2"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch2-1"
+            style="@style/SettingContextSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 1"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch2-2"
+            style="@style/SettingContextSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 2"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch2-3"
+            style="@style/SettingContextSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 3"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_SETTINGS_3"
+        android:layout_width="385dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_SETTINGS_2">
+
+        <TextView
+            android:id="@+id/category3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Category 3"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch3-1"
+            style="@style/SettingContextSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 1"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch3-2"
+            style="@style/SettingContextSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 2"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+        <Switch
+            android:id="@+id/switch3-3"
+            style="@style/SettingContextSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="43.4dp"
+            android:fontFamily="@font/roboto_light"
+            android:text=" Detail 3"
+            android:textColor="#B1A6CC"
+            android:textSize="25sp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1CAE4"
+            android:backgroundTint="#D1CAE4" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

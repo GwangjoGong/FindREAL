@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="ongoing">#FF6868</color>
     <color name="completed">#68FF81</color>
+    <color name="colorBackground">#4D5177</color>
 </resources>
