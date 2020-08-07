@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="675dp"
+        android:background="#22264C"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="41dp"
+        android:layout_height="27dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="@+id/toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:srcCompat="@drawable/backbutton" />
+
+    <TextView
+        android:id="@+id/text_INFORMATION"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="Information"
+        android:textColor="#B1A6CC"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+
+    <ImageView
+        android:id="@+id/app_image"
+        android:layout_width="140dp"
+        android:layout_height="195dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:srcCompat="@drawable/app_icon" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_INFORMATION_1"
+        android:layout_width="316dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="174dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/app_image"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/text_FindREAL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:gravity="center"
+            android:text="FindREAL"
+            android:textColor="#B1A6CC"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/text_purpose"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:fontFamily="@font/nunitosans_regular"
+            android:gravity="center"
+            android:text="Deepfaked Speech Image Detection"
+            android:textColor="#B1A6CC"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/text_version"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="@font/nunitosans_regular"
+            android:gravity="center_horizontal"
+            android:text="Ver 1.0"
+            android:textColor="#B1A6CC"
+            android:textSize="19sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_developers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Developers"
+        android:textColor="#B1A6CC"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_INFORMATION_1"
+        app:layout_constraintVertical_bias="0.22000003" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_INFORMATION_2"
+        android:layout_width="300dp"
+        android:layout_height="110.85dp"
+        android:background="@drawable/smooth_rectangle"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_developers"
+        app:layout_constraintVertical_bias="0.07999998">
+
+        <LinearLayout
+            android:layout_width="86dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_KJ"
+                android:layout_width="match_parent"
+                android:layout_height="36.95dp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="KwangJo"
+                android:textColor="#99AC9FCB"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/text_WJ"
+                android:layout_width="match_parent"
+                android:layout_height="36.95dp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="WooJin"
+                android:textColor="#99AC9FCB"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/text_YS"
+                android:layout_width="match_parent"
+                android:layout_height="36.95dp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="YunSoo"
+                android:textColor="#99AC9FCB"
+                android:textSize="19sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:layout_width="214dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_email_KJ"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="dwc05101@kaist.ac.kr"
+                android:textColor="#99AC9FCB"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/text_email_WJ"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="hyung1721@kaist.ac.kr"
+                android:textColor="#99AC9FCB"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/text_email_YS"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:fontFamily="@font/nunitosans_regular"
+                android:gravity="center"
+                android:text="xhaktm3@kaist.ac.kr"
+                android:textColor="#99AC9FCB"
+                android:textSize="19sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
