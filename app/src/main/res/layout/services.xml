@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:srcCompat="@drawable/Beginner" />
+        app:srcCompat="@drawable/beginner" />
 
     <ImageButton
         android:id="@+id/standard_button"
@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/beginner_button"
-        app:srcCompat="@drawable/Standard" />
+        app:srcCompat="@drawable/standard" />
 
     <ImageButton
         android:id="@+id/professional_button"
@@ -79,6 +79,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/standard_button"
-        app:srcCompat="@drawable/Professional" />
+        app:srcCompat="@drawable/professional" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
