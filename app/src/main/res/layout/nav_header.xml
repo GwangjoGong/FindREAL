@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="#22264C"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingBottom="30dp"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            app:srcCompat="@drawable/profile_default" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Username"
+                android:textSize="20sp"
+                android:textColor="#A7A7A7"
+                android:fontFamily="@font/nunitosans_light"
+                />
+
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="e-mail@kaist.ac.kr"
+                android:textSize="18sp"
+                android:textColor="#A7A7A7"
+                android:fontFamily="@font/nunitosans_light"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

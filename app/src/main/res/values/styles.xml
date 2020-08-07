@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -13,6 +13,11 @@
         <item name="android:thumb">@drawable/switch_thumb</item>
         <item name="android:track">@drawable/switch_track</item>
         <item name="android:switchMinWidth">10dp</item>
+    </style>
+
+    <style name="Style_MenuItem">
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">18dp</item>
     </style>
 
 </resources>
