@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">FindREAL</string>
+    <string name="my_page">My Page</string>
+    <string name="info">Information</string>
+    <string name="services">Services</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="count_ongoing">1 Ongoing Request</string>
+    <string name="count_completed">2 Completed Requests</string>
+    <string name="article_title">Deepfake Detection Challenge</string>
+    <string name="article_writer">by woojin</string>
+    <string name="article_content"> This competition is closed for submissions. Participants selected code submissions were re-run by the host on a privately-held test set and the private leaderboard results have been finalized. Late submissions will not be opened, due to an inability to replicate the unique design of this competition.
+
+        Deepfake techniques, which present realistic AI-generated videos of people doing and saying fictional things, have the potential to have a significant impact on how people determine the legitimacy of information presented online. These content generation and modification technologies may affect the quality of public discourse and the safeguarding of human rights—especially given that deepfakes may be used maliciously as a source of misinformation, manipulation, harassment, and persuasion. Identifying manipulated media is a technically demanding and rapidly evolving challenge that requires collaborations across the entire tech industry and beyond.
+
+        AWS, Facebook, Microsoft, the Partnership on AI’s Media Integrity Steering Committee, and academics have come together to build the Deepfake Detection Challenge (DFDC). The goal of the challenge is to spur researchers around the world to build innovative new technologies that can help detect deepfakes and manipulated media. Challenge participants must submit their code into a black box environment for testing. Participants will have the option to make their submission open or closed when accepting the prize. Open proposals will be eligible for challenge prizes as long as they abide by the open source licensing terms. Closed proposals will be proprietary and not be eligible to accept the prizes. Regardless of which track is chosen, all submissions will be evaluated in the same way. Results will be shown on the leaderboard.</string>
 </resources>
