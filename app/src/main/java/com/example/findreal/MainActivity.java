@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private View header;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
         // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         // Piechart for requests
+        initializePieChart();
+
+        // Setting and showing News list
+        initializeNewsList();
+    }
+
+    void initializePieChart() {
         PieChart requestPieChart = (PieChart)findViewById(R.id.requests_piechart);
 
         requestPieChart.setUsePercentValues(true);
@@ -61,8 +70,9 @@ public class MainActivity extends AppCompatActivity {
 //        data.setValueTextColor(Color.YELLOW);
 
         requestPieChart.setData(data);
+    }
 
-        // Setting and showing News list
+    void initializeNewsList() {
         NewsListViewAdapter adapter;
         RecyclerView recyclerView = findViewById(R.id.news_listview);
 
