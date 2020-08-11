@@ -16,6 +16,7 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -29,6 +30,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
