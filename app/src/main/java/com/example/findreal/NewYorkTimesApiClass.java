@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
@@ -27,11 +29,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.squareup.picasso.*;
+
 
 public class NewYorkTimesApiClass {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void loadArticle() throws IOException {
+    public static void loadArticleInfo() throws IOException {
         URL url = new URL("https://api.nytimes.com/svc/search/v2/articlesearch.json?" +
                 "begin_date=20180101" +
                 "&end_date=20200801" +
@@ -42,12 +46,15 @@ public class NewYorkTimesApiClass {
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
 
+        List<ArticleInfo> articleInfoList = new ArrayList<ArticleInfo>();
+
         try (BufferedReader r = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
             JSONObject jObject = new JSONObject(r.lines().collect(Collectors.joining("\n")));
             JSONObject responseObject = jObject.getJSONObject("response");
             JSONArray docsArray = responseObject.getJSONArray("docs");
 
-            for (int i = 0; i < 5; i++)
+            // Crawl 3 articles from New York Times and return with title and thumbnail
+            for (int i = 0; i < 3; i++)
             {
                 JSONObject article = docsArray.getJSONObject(i);
                 String url_article = article.getString("web_url");
@@ -58,7 +65,6 @@ public class NewYorkTimesApiClass {
                 String snippet = article.getString("snippet");
 
                 System.out.println(title);
-                loadContent(url_article);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -77,37 +83,10 @@ public class NewYorkTimesApiClass {
         System.out.println("\n");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void main(String[] args) throws IOException
-    {
-        loadArticle();
-    }
-
-    public static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap thumbnail = null;
-
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                thumbnail = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-
-            return thumbnail;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
+    public ImageView downloadImageFromURL(String url) {
+        ImageView imageView = null;
+        Picasso.get().load(url).into(imageView);
+        return imageView;
     }
 
 }
