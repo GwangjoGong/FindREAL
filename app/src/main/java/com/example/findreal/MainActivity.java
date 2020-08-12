@@ -1,6 +1,7 @@
 package com.example.findreal;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
@@ -31,13 +33,16 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private View header;
     private DrawerLayout drawerLayout;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +58,11 @@ public class MainActivity extends AppCompatActivity {
         initializePieChart();
 
         // initialize News list
-        initializeNewsList();
+        try {
+            initializeNewsList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initializeNavigation() {
@@ -157,7 +166,8 @@ public class MainActivity extends AppCompatActivity {
         requestPieChart.setData(data);
     }
 
-    public void initializeNewsList() {
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void initializeNewsList() throws IOException {
         NewsListViewAdapter adapter;
         RecyclerView recyclerView = findViewById(R.id.news_listview);
 
@@ -167,6 +177,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new NewsListViewAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new NewsListViewDecoration(20)); // set border between news
+
+        NewYorkTimesApiClass nytimesAPI = new NewYorkTimesApiClass();
+
+        List<ArticleInfo> autoLoadedArticleInfo = nytimesAPI.loadArticleInfo();
+        
 
         // By modifying below part and using NYTimes API, automatically load article related to deepfake
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.no_image), "News Title 1");

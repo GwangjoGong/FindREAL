@@ -1,6 +1,7 @@
 package com.example.findreal;
 
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.graphics.Bitmap;
@@ -35,7 +36,7 @@ import com.squareup.picasso.*;
 public class NewYorkTimesApiClass {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void loadArticleInfo() throws IOException {
+    public List<ArticleInfo> loadArticleInfo() throws IOException {
         URL url = new URL("https://api.nytimes.com/svc/search/v2/articlesearch.json?" +
                 "begin_date=20180101" +
                 "&end_date=20200801" +
@@ -57,30 +58,43 @@ public class NewYorkTimesApiClass {
             for (int i = 0; i < 3; i++)
             {
                 JSONObject article = docsArray.getJSONObject(i);
-                String url_article = article.getString("web_url");
-                //System.out.println(url_article);
+                ArticleInfo tempInfo = new ArticleInfo();
 
+                String urlArticle = article.getString("web_url");
                 JSONObject headlineObject = article.getJSONObject("headline");
-                String title = headlineObject.getString("main");
-                String snippet = article.getString("snippet");
+                String titleArticle = headlineObject.getString("main");
 
-                System.out.println(title);
+                tempInfo.setTitleStr(titleArticle);
+                tempInfo.setUrlStr(urlArticle);
+
+                // Codes to be implemented more
+                String thumbnailUrl = "https://...";
+                ImageView tempThumbnail = this.downloadImageFromURL(thumbnailUrl);
+                Drawable thumbnailArticle = tempThumbnail.getDrawable();
+                //
+
+                tempInfo.setThumbnailDrawable(thumbnailArticle);
+
+                articleInfoList.add(tempInfo);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        return articleInfoList;
     }
 
-    public static void loadContent(String url) throws IOException {
+    public static String loadContent(String url) throws IOException {
         Document doc = Jsoup.parse(new URL(url).openStream(), "iso-8859-1", url);
         Elements paragraphs = doc.select("div[class=css-53u6y8]");
+        String allContent = "";
 
         for (Element paragraph : paragraphs){
             String temp = paragraph.text();
-            //temp = temp.replace("???","");
-            System.out.println(temp);
+            allContent = allContent.concat(temp);
         }
-        System.out.println("\n");
+
+        return allContent;
     }
 
     public ImageView downloadImageFromURL(String url) {
