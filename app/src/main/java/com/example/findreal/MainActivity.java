@@ -2,7 +2,6 @@ package com.example.findreal;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -12,8 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Hide Navigation Bar - doesn't work well
         // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+        if(Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy((policy));
+        }
 
         // initialize navigation menu
         initializeNavigation();
@@ -178,14 +185,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new NewsListViewDecoration(20)); // set border between news
 
-        NewYorkTimesApiClass nytimesAPI = new NewYorkTimesApiClass();
+        NewYorkTimesApiClass nyTimesAPI = new NewYorkTimesApiClass();
+        List<ArticleInfo> autoLoadedArticleInfo = nyTimesAPI.loadArticleInfo();
 
-        List<ArticleInfo> autoLoadedArticleInfo = nytimesAPI.loadArticleInfo();
-        
-
-        // By modifying below part and using NYTimes API, automatically load article related to deepfake
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.no_image), "News Title 1");
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.no_image), "News Title 2");
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.no_image), "News Title 3");
+        // add 3 article previews
+        for (ArticleInfo articleInfo : autoLoadedArticleInfo) {
+            Drawable thumbnailDrawable = new BitmapDrawable(getResources(), articleInfo.getThumbnailBitmap());
+            adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr());
+        }
     }
 }

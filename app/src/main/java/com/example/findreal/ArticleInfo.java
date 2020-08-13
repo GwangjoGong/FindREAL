@@ -1,14 +1,14 @@
 package com.example.findreal;
 
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 
 public class ArticleInfo {
-    private Drawable thumbnailDrawable;
+    private Bitmap thumbnailBitmap;
     private String titleStr;
     private String urlStr;
 
-    public Drawable getThumbnailBitmap() {
-        return thumbnailDrawable;
+    public Bitmap getThumbnailBitmap() {
+        return thumbnailBitmap;
     }
 
     public String getTitleStr() {
@@ -17,8 +17,8 @@ public class ArticleInfo {
 
     public String getUrlStr() { return urlStr; }
 
-    public void setThumbnailDrawable(Drawable thumbnailDrawable) {
-        this.thumbnailDrawable = thumbnailDrawable;
+    public void setThumbnailBitmap(Bitmap thumbnailBitmap) {
+        this.thumbnailBitmap = thumbnailBitmap;
     }
 
     public void setTitleStr(String titleStr) {

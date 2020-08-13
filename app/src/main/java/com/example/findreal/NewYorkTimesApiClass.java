@@ -1,14 +1,16 @@
 package com.example.findreal;
 
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.graphics.Bitmap;
 import android.util.Log;
-import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -30,10 +32,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.squareup.picasso.*;
-
-
-public class NewYorkTimesApiClass {
+public class NewYorkTimesApiClass extends AppCompatActivity {
+    private Bitmap result;
+    private static final String TAG = "MainActivity";
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<ArticleInfo> loadArticleInfo() throws IOException {
@@ -43,18 +44,20 @@ public class NewYorkTimesApiClass {
                 "&q=deepfake" +
                 "&api-key=8rbAjzkDbCUjngtsT76jQi6kNiW0yNSR");
 
+        Log.d(TAG, "request api");
+
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
 
-        List<ArticleInfo> articleInfoList = new ArrayList<ArticleInfo>();
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (BufferedReader r = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
             JSONObject jObject = new JSONObject(r.lines().collect(Collectors.joining("\n")));
             JSONObject responseObject = jObject.getJSONObject("response");
             JSONArray docsArray = responseObject.getJSONArray("docs");
 
-            // Crawl 3 articles from New York Times and return with title and thumbnail
+            // Crawl 3 articles from New York Times
             for (int i = 0; i < 3; i++)
             {
                 JSONObject article = docsArray.getJSONObject(i);
@@ -67,18 +70,41 @@ public class NewYorkTimesApiClass {
                 tempInfo.setTitleStr(titleArticle);
                 tempInfo.setUrlStr(urlArticle);
 
-                // Codes to be implemented more
-                String thumbnailUrl = "https://...";
-                ImageView tempThumbnail = this.downloadImageFromURL(thumbnailUrl);
-                Drawable thumbnailArticle = tempThumbnail.getDrawable();
-                //
+                String thumbnailUrl = "https://nytimes.com/"; // base url
 
-                tempInfo.setThumbnailDrawable(thumbnailArticle);
+                JSONArray multimediaObject = article.getJSONArray("multimedia");
+                JSONObject thumbnailObject = multimediaObject.getJSONObject(0);
+                thumbnailUrl += thumbnailObject.getString("url"); // add image path
+
+                GetBitmapFromURL downloadTask = new GetBitmapFromURL();
+                downloadTask.execute(thumbnailUrl);
+
+                Log.d(TAG, thumbnailUrl);
+
+                Bitmap thumbnailArticle = result;
+
+                tempInfo.setThumbnailBitmap(thumbnailArticle);
 
                 articleInfoList.add(tempInfo);
+
+                Log.d(TAG, Integer.toString(articleInfoList.size()));
             }
         } catch (JSONException e) {
             e.printStackTrace();
+
+            // fill with empty information
+            int count = articleInfoList.size();
+            for (int i = count; i < 3; i++) {
+                ArticleInfo emptyInfo = new ArticleInfo();
+
+                Drawable tempThumbnail = getDrawable(R.drawable.no_image);
+
+                emptyInfo.setThumbnailBitmap(((BitmapDrawable)tempThumbnail).getBitmap());
+                emptyInfo.setTitleStr("Empty Title");
+                emptyInfo.setUrlStr("empty");
+
+                articleInfoList.add(i, emptyInfo);
+            }
         }
 
         return articleInfoList;
@@ -97,10 +123,30 @@ public class NewYorkTimesApiClass {
         return allContent;
     }
 
-    public ImageView downloadImageFromURL(String url) {
-        ImageView imageView = null;
-        Picasso.get().load(url).into(imageView);
-        return imageView;
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
+    public class GetBitmapFromURL extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            return getBitmapFromURL(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            result = bitmap;
+        }
+    }
 }

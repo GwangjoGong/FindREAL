@@ -3,6 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
     android:clickable="true">
 
     <ImageView
@@ -13,13 +15,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="center"
         android:layout_marginTop="3dp"
         android:id="@+id/news_title"
         android:text="News Title 1"
         android:fontFamily="@font/nunitosans_regular"
         android:textColor="#0B0F34"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"
