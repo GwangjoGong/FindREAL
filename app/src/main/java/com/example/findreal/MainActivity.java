@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(View v, int position) {
                 NewsListViewItem articleData = (NewsListViewItem) adapter.getItem(position);
                 Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
-                intent.putExtra("url", articleData.getUrlStr());
+                intent.putExtra("articleData", articleData);
                 startActivity(intent);
             }
         });

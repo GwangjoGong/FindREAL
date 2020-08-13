@@ -44,7 +44,6 @@ public class NewYorkTimesApiClass extends AppCompatActivity {
                 "&q=deepfake" +
                 "&api-key=8rbAjzkDbCUjngtsT76jQi6kNiW0yNSR");
 
-        Log.d(TAG, "request api");
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");

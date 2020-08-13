@@ -2,8 +2,10 @@ package com.example.findreal;
 
 import android.graphics.drawable.Drawable;
 
-public class NewsListViewItem {
-    private Drawable thumbnailDrawable;
+import java.io.Serializable;
+
+public class NewsListViewItem implements Serializable {
+    private transient Drawable thumbnailDrawable;
     private String newsTitleStr;
     private String urlStr;
 
