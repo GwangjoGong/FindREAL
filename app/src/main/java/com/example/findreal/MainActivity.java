@@ -175,13 +175,23 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void initializeNewsList() throws IOException {
-        NewsListViewAdapter adapter;
+        final NewsListViewAdapter adapter;
         RecyclerView recyclerView = findViewById(R.id.news_listview);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         adapter = new NewsListViewAdapter();
+        adapter.setOnItemClickListener(new NewsListViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                NewsListViewItem articleData = (NewsListViewItem) adapter.getItem(position);
+                Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
+                intent.putExtra("url", articleData.getUrlStr());
+                startActivity(intent);
+            }
+        });
+
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new NewsListViewDecoration(20)); // set border between news
 
@@ -191,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         // add 3 article previews
         for (ArticleInfo articleInfo : autoLoadedArticleInfo) {
             Drawable thumbnailDrawable = new BitmapDrawable(getResources(), articleInfo.getThumbnailBitmap());
-            adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr());
+            adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr(), articleInfo.getUrlStr());
         }
     }
 }
