@@ -54,7 +54,7 @@
         app:srcCompat="@drawable/border" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/imview_added"
         android:layout_width="940px"
         android:layout_height="550px"
         android:layout_marginStart="20dp"
@@ -72,16 +72,16 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        android:text="TextView"
+        android:text="The request is added in your list. Deepfake  detection procedure takes a few minutes.  Please wait for the result."
         android:textAlignment="center"
         android:textColor="#B1A6CC"
         android:textSize="45px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+        app:layout_constraintTop_toBottomOf="@+id/imview_added" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imbtn_back_home"
         android:layout_width="940px"
         android:layout_height="120px"
         android:layout_marginStart="20dp"

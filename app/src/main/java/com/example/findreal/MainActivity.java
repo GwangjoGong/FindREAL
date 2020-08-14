@@ -5,11 +5,13 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
@@ -25,16 +27,38 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    public static String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(email == null){
+            Intent userdata = getIntent();
+            email = userdata.getStringExtra("token");
+            if(email == null){
+                Toast.makeText(this, "Invalid Access", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
+
+
+
         // Hide Navigation Bar - doesn't work well
         // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-        // Piechart for requests
         PieChart requestPieChart = (PieChart)findViewById(R.id.requests_piechart);
+        // Piechart for requests
+
+        requestPieChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RequestListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         requestPieChart.setUsePercentValues(true);
         requestPieChart.getDescription().setEnabled(false);
