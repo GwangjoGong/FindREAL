@@ -13,14 +13,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -40,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private final String TAG = "MainActivity";
 
     private View header;
     private DrawerLayout drawerLayout;
@@ -62,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
         initializeNavigation();
 
         // Piechart for requests
+        LinearLayout requests = (LinearLayout) findViewById(R.id.requests);
+        requests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, RequestListActivity.class);
+//                startActivity(intent);
+                Log.d(TAG, "changed to RequestListActivity");
+            }
+        });
         initializePieChart();
 
         // initialize News list
@@ -86,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                menuItem.setChecked(true);
+                menuItem.setChecked(false);
                 drawerLayout.closeDrawers();
                 Intent intent;
 
@@ -141,8 +154,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     public void initializePieChart() {
         PieChart requestPieChart = (PieChart)findViewById(R.id.requests_piechart);
 
@@ -168,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
 
         PieData data = new PieData((dataSet));
         data.setValueTextSize(0f);
-//        data.setValueTextColor(Color.YELLOW);
 
         requestPieChart.setData(data);
     }
@@ -201,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         // add 3 article previews
         for (ArticleInfo articleInfo : autoLoadedArticleInfo) {
             Drawable thumbnailDrawable = new BitmapDrawable(getResources(), articleInfo.getThumbnailBitmap());
-            adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr(), articleInfo.getUrlStr());
+            adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr(), articleInfo.getUrlStr(), articleInfo.getThumbnailUrlStr());
         }
     }
 }

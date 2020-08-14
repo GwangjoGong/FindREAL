@@ -33,8 +33,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class NewYorkTimesApiClass extends AppCompatActivity {
-    private Bitmap result;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "API Call";
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<ArticleInfo> loadArticleInfo() throws IOException {
@@ -75,18 +74,19 @@ public class NewYorkTimesApiClass extends AppCompatActivity {
                 JSONObject thumbnailObject = multimediaObject.getJSONObject(0);
                 thumbnailUrl += thumbnailObject.getString("url"); // add image path
 
-                GetBitmapFromURL downloadTask = new GetBitmapFromURL();
-                downloadTask.execute(thumbnailUrl);
+//                GetBitmapFromURL downloadTask = new GetBitmapFromURL();
+//                downloadTask.execute(thumbnailUrl);
+//                Bitmap thumbnailArticle = downloadTask.result;
 
-                Log.d(TAG, thumbnailUrl);
+                Bitmap thumbnailArticle = getBitmapFromURL(thumbnailUrl);
 
-                Bitmap thumbnailArticle = result;
+                Log.d(TAG, "Image width: "  + thumbnailArticle.getWidth());
+                Log.d(TAG, "Image height: " + thumbnailArticle.getHeight());
 
                 tempInfo.setThumbnailBitmap(thumbnailArticle);
+                tempInfo.setThumbnailUrlStr(thumbnailUrl);
 
                 articleInfoList.add(tempInfo);
-
-                Log.d(TAG, Integer.toString(articleInfoList.size()));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -109,17 +109,27 @@ public class NewYorkTimesApiClass extends AppCompatActivity {
         return articleInfoList;
     }
 
-    public static String loadContent(String url) throws IOException {
+    public static List<String> loadContent(String url) throws IOException {
         Document doc = Jsoup.parse(new URL(url).openStream(), "iso-8859-1", url);
+        List<String> result = new ArrayList<>(3);
+
         Elements paragraphs = doc.select("div[class=css-53u6y8]");
         String allContent = "";
 
         for (Element paragraph : paragraphs){
-            String temp = paragraph.text();
-            allContent = allContent.concat(temp);
+            String temp = paragraph.text() + "\n\n";
+            allContent += temp;
         }
+        allContent += "This article is loaded from The New York Times.";
 
-        return allContent;
+        String author = doc.select("p[itemprop=author]").text();
+        String date   = doc.select("time[class=css-1sbuyqj e16638kd4]").text();
+
+        result.add(0, allContent);
+        result.add(1, author);
+        result.add(2, date);
+
+        return result;
     }
 
     public static Bitmap getBitmapFromURL(String src) {
@@ -130,22 +140,23 @@ public class NewYorkTimesApiClass extends AppCompatActivity {
             connection.connect();
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            Log.d(TAG, "complete download image from: " + src);
             return myBitmap;
         } catch (IOException e){
             e.printStackTrace();
+            Log.d(TAG, "cannot download image from: " + src);
             return null;
         }
     }
 
-    public class GetBitmapFromURL extends AsyncTask<String, Void, Bitmap> {
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            return getBitmapFromURL(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            result = bitmap;
-        }
-    }
+//    public class GetBitmapFromURL extends AsyncTask<String, Void, Bitmap> {
+//        private Bitmap result;
+//        @Override
+//        protected Bitmap doInBackground(String... params) {
+//            return getBitmapFromURL(params[0]);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Bitmap bitmap) { this.result = bitmap; }
+//    }
 }

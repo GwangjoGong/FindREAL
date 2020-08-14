@@ -23,7 +23,7 @@
             <ImageView
                 android:id="@+id/news_main_picture"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:src="@drawable/no_image" />
 
             <LinearLayout
@@ -44,33 +44,44 @@
                         android:id="@+id/article_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="right"
                         android:text="@string/article_title"
                         android:textColor="#07080F"
                         android:textSize="20sp"
-                        android:fontFamily="@font/montserrat_light"/>
+                        android:fontFamily="@font/montserrat_regular"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="20dp"
                         android:orientation="horizontal"
                         android:layout_gravity="center">
 
                         <ImageView
                             android:layout_width="12dp"
                             android:layout_height="12dp"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="3dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="8dp"
                             app:srcCompat="@drawable/writer_icon"/>
 
                         <TextView
-                            android:id="@+id/article_writer"
-                            android:layout_width="match_parent"
+                            android:id="@+id/article_author"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/article_writer"
                             android:textColor="#07080F"
                             android:textSize="12sp"
                             android:fontFamily="@font/nunitosans_light"/>
+
+                        <TextView
+                            android:id="@+id/article_date"
+                            android:layout_marginStart="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jan. 21, 2019"
+                            android:textColor="#07080F"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/nunitosans_light" />
 
                     </LinearLayout>
 
@@ -89,7 +100,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/article_content"
                     android:textColor="#141414"
-                    android:textSize="12sp"
+                    android:textSize="15sp"
                     android:lineSpacingExtra="3dp"
                     android:fontFamily="@font/roboto_light"/>
 
@@ -103,7 +114,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
+        android:background="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
