@@ -1,11 +1,7 @@
 package com.example.findreal;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -38,8 +34,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -64,7 +58,7 @@ public class LoginActivity extends AppCompatActivity{
 
         sessionCallback = new SessionCallback();
         Session.getCurrentSession().addCallback(sessionCallback);
-        Session.getCurrentSession().checkAndImplicitOpen();
+        //Session.getCurrentSession().checkAndImplicitOpen();
 
         findViewById(R.id.imbtn_google).setOnClickListener(new View.OnClickListener() {
             @Override
