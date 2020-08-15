@@ -32,6 +32,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".NewsActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ServicesBeginnerActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".RequestListActivity"></activity>
         <activity android:name=".AddRequestActivity"></activity>
