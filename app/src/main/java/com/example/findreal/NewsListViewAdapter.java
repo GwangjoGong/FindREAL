@@ -51,6 +51,7 @@ public class NewsListViewAdapter extends RecyclerView.Adapter<NewsListViewAdapte
 
         void onBind(NewsListViewItem item) {
             thumbnail.setImageDrawable(item.getThumbnail());
+            thumbnail.setScaleType(ImageView.ScaleType.CENTER_CROP);
             title.setText(item.getNewsTitle());
 
         }
@@ -88,12 +89,13 @@ public class NewsListViewAdapter extends RecyclerView.Adapter<NewsListViewAdapte
         return newsListViewItems.get(position);
     }
 
-    public void addItem(Drawable thumbnail, String title, String url) {
+    public void addItem(Drawable thumbnail, String title, String url, String thumbnailUrl) {
         NewsListViewItem item = new NewsListViewItem();
 
         item.setThumbnail(thumbnail);
         item.setNewsTitle(title);
         item.setUrlStr(url);
+        item.setThumbnailUrlStr(thumbnailUrl);
 
         newsListViewItems.add(item);
     }

@@ -9,19 +9,19 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:id="@+id/news_thumbnail"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="right"
         android:layout_marginTop="3dp"
         android:id="@+id/news_title"
         android:text="News Title 1"
         android:fontFamily="@font/nunitosans_regular"
         android:textColor="#0B0F34"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <View
         android:layout_width="match_parent"

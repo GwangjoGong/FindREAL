@@ -31,28 +31,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar" />
 
+
+    <ImageButton
+        android:id="@+id/imbtn_back"
+        android:layout_width="100px"
+        android:layout_height="70px"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:srcCompat="@drawable/btn_icon_back" />
+
     <ScrollView
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_header_ongoing"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -108,21 +123,19 @@
                 android:id="@+id/list_ongoing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_header_ongoing" />
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="35dp"
+                android:layout_weight="2" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_header_completed"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_ongoing">
+                android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -161,30 +174,15 @@
 
             <ListView
                 android:id="@+id/list_completed"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_header_completed" />
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="35dp"
+                android:layout_weight="1"
+                android:clipToPadding="false" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
-
-    <ImageButton
-        android:id="@+id/imbtn_back"
-        android:layout_width="100px"
-        android:layout_height="70px"
-        android:layout_marginStart="10dp"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:scaleX="2"
-        android:scaleY="2"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:srcCompat="@drawable/btn_icon_back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
