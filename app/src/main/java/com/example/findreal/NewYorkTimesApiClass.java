@@ -74,10 +74,6 @@ public class NewYorkTimesApiClass extends AppCompatActivity {
                 JSONObject thumbnailObject = multimediaObject.getJSONObject(0);
                 thumbnailUrl += thumbnailObject.getString("url"); // add image path
 
-//                GetBitmapFromURL downloadTask = new GetBitmapFromURL();
-//                downloadTask.execute(thumbnailUrl);
-//                Bitmap thumbnailArticle = downloadTask.result;
-
                 Bitmap thumbnailArticle = getBitmapFromURL(thumbnailUrl);
 
                 Log.d(TAG, "Image width: "  + thumbnailArticle.getWidth());
@@ -148,15 +144,4 @@ public class NewYorkTimesApiClass extends AppCompatActivity {
             return null;
         }
     }
-
-//    public class GetBitmapFromURL extends AsyncTask<String, Void, Bitmap> {
-//        private Bitmap result;
-//        @Override
-//        protected Bitmap doInBackground(String... params) {
-//            return getBitmapFromURL(params[0]);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Bitmap bitmap) { this.result = bitmap; }
-//    }
 }
