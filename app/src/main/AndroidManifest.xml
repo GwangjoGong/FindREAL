@@ -13,26 +13,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="${cleartextTrafficPermitted}"
-        >
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="${cleartextTrafficPermitted}">
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-
-
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MyPageActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".InformationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ServicesActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NewsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".RequestListActivity"></activity>
         <activity android:name=".AddRequestActivity"></activity>
         <activity android:name=".AddRequestSuccessActivity"></activity>
         <activity android:name=".RequestResultActivity"></activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 
 </manifest>

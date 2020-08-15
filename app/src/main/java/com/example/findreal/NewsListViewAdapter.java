@@ -1,6 +1,5 @@
 package com.example.findreal;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.ImageView;
 
@@ -15,6 +15,16 @@ import java.util.ArrayList;
 
 public class NewsListViewAdapter extends RecyclerView.Adapter<NewsListViewAdapter.NewsListViewHolder>{
     private ArrayList<NewsListViewItem> newsListViewItems = new ArrayList<NewsListViewItem>();
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+
+    private OnItemClickListener mListener = null;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
 
     class NewsListViewHolder extends RecyclerView.ViewHolder {
         private ImageView thumbnail;
@@ -25,10 +35,23 @@ public class NewsListViewAdapter extends RecyclerView.Adapter<NewsListViewAdapte
 
             thumbnail = itemView.findViewById(R.id.news_thumbnail);
             title = itemView.findViewById(R.id.news_title);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION) {
+                        if(mListener != null) {
+                            mListener.onItemClick(v, pos);
+                        }
+                    }
+                }
+            });
         }
 
         void onBind(NewsListViewItem item) {
             thumbnail.setImageDrawable(item.getThumbnail());
+            thumbnail.setScaleType(ImageView.ScaleType.CENTER_CROP);
             title.setText(item.getNewsTitle());
 
         }
@@ -66,11 +89,13 @@ public class NewsListViewAdapter extends RecyclerView.Adapter<NewsListViewAdapte
         return newsListViewItems.get(position);
     }
 
-    public void addItem(Drawable thumbnail, String title) {
+    public void addItem(Drawable thumbnail, String title, String url, String thumbnailUrl) {
         NewsListViewItem item = new NewsListViewItem();
 
         item.setThumbnail(thumbnail);
         item.setNewsTitle(title);
+        item.setUrlStr(url);
+        item.setThumbnailUrlStr(thumbnailUrl);
 
         newsListViewItems.add(item);
     }
