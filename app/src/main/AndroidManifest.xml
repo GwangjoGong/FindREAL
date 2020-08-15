@@ -29,6 +29,11 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ServicesBeginnerActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".RequestListActivity"></activity>
+        <activity android:name=".AddRequestActivity"></activity>
+        <activity android:name=".AddRequestSuccessActivity"></activity>
+        <activity android:name=".RequestResultActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

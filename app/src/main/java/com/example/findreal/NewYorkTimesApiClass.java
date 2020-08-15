@@ -32,9 +32,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class    NewYorkTimesApiClass extends AppCompatActivity {
-    private Bitmap result;
-    private static final String TAG = "MainActivity";
+public class NewYorkTimesApiClass extends AppCompatActivity {
+    private static final String TAG = "API Call";
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<ArticleInfo> loadArticleInfo() throws IOException {
