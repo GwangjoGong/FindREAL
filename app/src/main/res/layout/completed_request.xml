@@ -2,15 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="920px"
-    android:layout_height="360px"
-    android:background="#141B50">
+    android:layout_width="match_parent"
+    android:layout_height="380px"
+    android:layout_marginBottom="20px"
+    android:background="#141B50"
+    android:clipToPadding="false">
 
     <ImageView
         android:id="@+id/imview_completed_request"
         android:layout_width="360px"
         android:layout_height="360px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -19,9 +21,9 @@
         android:id="@+id/imview_request_mark"
         android:layout_width="140px"
         android:layout_height="120px"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:translationX="-15dp"
+        app:layout_constraintBottom_toTopOf="@+id/padder"
+        app:layout_constraintStart_toEndOf="@+id/tv_request_result"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/request_good" />
 
@@ -30,10 +32,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Result"
+        android:text="Highly Suspicious"
         android:textColor="#B1A6CC"
         android:textSize="40px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/padder"
+        app:layout_constraintEnd_toStartOf="@+id/imview_request_mark"
         app:layout_constraintStart_toEndOf="@+id/imview_completed_request"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/padder"
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="#4D5177"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imview_completed_request">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

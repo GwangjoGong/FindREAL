@@ -23,11 +23,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,6 +212,15 @@ public class MainActivity extends AppCompatActivity {
 
         // PieChart
         PieChart requestPieChart = (PieChart)findViewById(R.id.requests_piechart);
+        // Piechart for requests
+
+        requestPieChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RequestListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         requestPieChart.setUsePercentValues(true);
         requestPieChart.getDescription().setEnabled(false);
