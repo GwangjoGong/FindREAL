@@ -61,15 +61,18 @@
 
     </LinearLayout>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="136dp"
-        android:layout_height="169dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:civ_border_width="0dp"
+        app:civ_circle_background_color="#FFFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.110000014"
+        app:layout_constraintVertical_bias="0.149"
         app:srcCompat="@drawable/trump" />
 
     <TextView
@@ -246,7 +249,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/nunitosans_regular"
             android:gravity="center|right"
-            android:text="010-1234-5678"
+            android:text=""
             android:textColor="#99AC9FCB"
             android:textSize="20sp" />
 
@@ -285,7 +288,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/nunitosans_regular"
             android:gravity="center|right"
-            android:text="Washington"
+            android:text=""
             android:textColor="#99AC9FCB"
             android:textSize="20sp" />
 

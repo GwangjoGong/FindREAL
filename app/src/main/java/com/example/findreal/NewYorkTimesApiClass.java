@@ -32,7 +32,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class NewYorkTimesApiClass extends AppCompatActivity {
+public class    NewYorkTimesApiClass extends AppCompatActivity {
     private Bitmap result;
     private static final String TAG = "MainActivity";
 
