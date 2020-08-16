@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void initializeNavigation(String email) throws JSONException {
+    public void initializeNavigation(final String email) throws JSONException {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     case R.id.menu_mypage:
                         intent = new Intent (MainActivity.this, MyPageActivity.class);
+                        intent.putExtra("token",email);
                         startActivity(intent);
                         break;
                     case R.id.menu_info:
