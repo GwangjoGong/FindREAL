@@ -2,6 +2,7 @@ package com.example.findreal;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.content.Intent;
 

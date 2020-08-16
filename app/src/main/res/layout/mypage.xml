@@ -79,8 +79,8 @@
         android:id="@+id/text_MYPAGE_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="156dp"
         android:fontFamily="@font/montserrat_semibold"
         android:text="Details"
         android:textColor="#B1A6CC"
@@ -88,29 +88,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout_MYPAGE_1" />
 
-    <TextView
-        android:id="@+id/text_MYPAGE_additional"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="Additional"
-        android:textColor="#B1A6CC"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout_MYPAGE_4" />
-
     <LinearLayout
         android:id="@+id/linearLayout_MYPAGE_2"
         android:layout_width="339dp"
         android:layout_height="39dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/smooth_rectangle_noboundary"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_MYPAGE_details" >
+        app:layout_constraintTop_toBottomOf="@+id/text_MYPAGE_details">
 
         <TextView
             android:id="@+id/text_MYPAGE_email"
@@ -145,7 +132,7 @@
         android:id="@+id/linearLayout_MYPAGE_3"
         android:layout_width="339dp"
         android:layout_height="39dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/smooth_rectangle_noboundary"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +172,7 @@
         android:id="@+id/linearLayout_MYPAGE_4"
         android:layout_width="339dp"
         android:layout_height="39dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/smooth_rectangle_noboundary"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -211,84 +198,6 @@
             android:fontFamily="@font/nunitosans_regular"
             android:gravity="center|right"
             android:text="Standard"
-            android:textColor="#99AC9FCB"
-            android:textSize="20sp" />
-
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout_MYPAGE_5"
-        android:layout_width="339dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="11dp"
-        android:background="@drawable/smooth_rectangle_noboundary"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_MYPAGE_additional">
-
-        <TextView
-            android:id="@+id/text_MYPAGE_phonenumber"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunitosans_regular"
-            android:gravity="center|left"
-            android:text="  Phone Number "
-            android:textColor="#99AC9FCB"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/phonenumber_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunitosans_regular"
-            android:gravity="center|right"
-            android:text=""
-            android:textColor="#99AC9FCB"
-            android:textSize="20sp" />
-
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout_MYPAGE_6"
-        android:layout_width="339dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="11dp"
-        android:background="@drawable/smooth_rectangle_noboundary"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout_MYPAGE_5">
-
-        <TextView
-            android:id="@+id/text_MYPAGE_country"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunitosans_regular"
-            android:gravity="center|left"
-            android:text="  Country"
-            android:textColor="#99AC9FCB"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/country_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunitosans_regular"
-            android:gravity="center|right"
-            android:text=""
             android:textColor="#99AC9FCB"
             android:textSize="20sp" />
 

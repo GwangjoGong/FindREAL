@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        email = "flerika_kg@naver.com";
-
         if(email == null){
             Intent userdata = getIntent();
             email = userdata.getStringExtra("token");
