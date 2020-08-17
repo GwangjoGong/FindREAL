@@ -4,17 +4,23 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageButton;
 
 import com.bumptech.glide.*;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CenterInside;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.json.JSONObject;
 
@@ -45,8 +51,6 @@ public class MyPageActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-        email = "flerika_kg@naver.com";
 
         if (email == null) {
             Intent userdata = getIntent();

@@ -3,24 +3,23 @@ package com.example.findreal;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.preference.PreferenceActivity;
-import android.provider.Settings;
+
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -32,27 +31,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.helper.HttpConnection;
-import org.w3c.dom.Text;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -64,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     public static String email;
     private View header;
     private DrawerLayout drawerLayout;
+
+    private List<ArticleInfo> loadedArticleInfo = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
 
@@ -78,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        email = "flerika_kg@naver.com";
-
         if(email == null){
             Intent userdata = getIntent();
             email = userdata.getStringExtra("token");
@@ -89,28 +77,33 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Hide Navigation Bar - doesn't work well
-        // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-
         if(Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy((policy));
         }
 
         // initialize navigation menu
-        initializeNavigation(email);
+        try {
+            initializeNavigation(email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // Initialize requests
         LinearLayout requests = (LinearLayout) findViewById(R.id.requests);
         requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, RequestListActivity.class);
-//                startActivity(intent);
-                Log.d(TAG, "changed to RequestListActivity");
+                Intent intent = new Intent(MainActivity.this, RequestListActivity.class);
+                startActivity(intent);
             }
         });
-        initializeRequests(email);
+
+        try {
+            initializeRequests(email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // initialize News list
         try {
@@ -120,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void initializeNavigation(String email) {
+    public void initializeNavigation(final String email) throws JSONException {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -131,8 +124,27 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView useremail = (TextView) headerView.findViewById(R.id.user_email);
-        useremail.setText(email);
+
+        String url = "http://3.35.41.92:3000/profile";
+        Map<String, Object> data = new LinkedHashMap<>();
+        data.put("email", email);
+
+        byte[] signInDataBytes = LoginActivity.parseParameter(data);
+        String result = LoginActivity.sendPost(signInDataBytes, url);
+
+        JSONObject response = new JSONObject(result);
+        JSONObject userObject = response.getJSONObject("user");
+        String user = userObject.getString("name");
+        String profileUrl = userObject.getString("profile");
+
+        Bitmap profileBitmap = NewYorkTimesApiClass.getBitmapFromURL(profileUrl);
+
+        ImageView userProfile = (ImageView) headerView.findViewById(R.id.profile);
+        userProfile.setImageBitmap(profileBitmap);
+        TextView userName = (TextView) headerView.findViewById(R.id.user_name);
+        userName.setText(user);
+        TextView userEmail = (TextView) headerView.findViewById(R.id.user_email);
+        userEmail.setText(email);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -145,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     case R.id.menu_mypage:
                         intent = new Intent (MainActivity.this, MyPageActivity.class);
+                        intent.putExtra("token",email);
                         startActivity(intent);
                         break;
                     case R.id.menu_info:
@@ -159,10 +172,10 @@ public class MainActivity extends AppCompatActivity {
                         intent = new Intent (MainActivity.this, SettingsActivity.class);
                         startActivity(intent);
                         break;
-//                    case R.id.menu_logout:
-//                        intent = new Intent (MainActivity.this, LoginActivity.class);
-//                        startActivity(intent);
-//                        break;
+                    case R.id.menu_logout:
+                        intent = new Intent (MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        break;
                 }
                 return true;
             }
@@ -192,16 +205,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void initializeRequests(String email) {
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void initializeRequests(String email) throws JSONException {
         // Requests
         TextView ongoingRequests   = (TextView) findViewById(R.id.ongoing_requests);
         TextView completedRequests = (TextView) findViewById(R.id.completed_requests);
 
         String url = "http://3.35.41.92:3000/requests";
-        int[] result = sendPost(email, url);
+        Map<String, Object> data = new LinkedHashMap<>();
+        data.put("email", email);
 
-        Integer numOfOngoingRequests = result[0];
-        Integer numOfCompletedRequests = result[1];
+        byte[] signInDataBytes = LoginActivity.parseParameter(data);
+        String result = LoginActivity.sendPost(signInDataBytes, url);
+
+        JSONObject response = new JSONObject(result);
+        JSONArray doneArray = response.getJSONArray("done");
+        JSONArray progressArray = response.getJSONArray("progress");
+
+        int numOfOngoingRequests = progressArray.length();
+        int numOfCompletedRequests = doneArray.length();
 
         if (numOfOngoingRequests <= 1){
             ongoingRequests.setText(numOfOngoingRequests + " Ongoing Request");
@@ -248,93 +270,11 @@ public class MainActivity extends AppCompatActivity {
 
         dataSet.setColors(new int[] {getResources().getColor(R.color.completed), getResources().getColor(R.color.ongoing)});
 
-        PieData data = new PieData((dataSet));
-        data.setValueTextSize(0f);
+        PieData pieData = new PieData((dataSet));
+        pieData.setValueTextSize(0f);
 
-        requestPieChart.setData(data);
+        requestPieChart.setData(pieData);
     }
-
-    public static int[] sendPost(final String email, final String url) {
-        final int[] result = new int[2];
-        Map<String, Object> data = new LinkedHashMap<>();
-        data.put("email", email);
-
-        final byte[] singInDataBytes = parseParameter(data);
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL requestUrl = new URL(url);
-                    StringBuffer res = new StringBuffer();
-
-                    HttpURLConnection conn = (HttpURLConnection) requestUrl.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                    conn.setRequestProperty("Content-Length", String.valueOf(singInDataBytes.length));
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    os.write(singInDataBytes);
-
-                    os.flush();
-                    os.close();
-
-                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
-                    Log.i("MSG", conn.getResponseMessage());
-
-                    int status = conn.getResponseCode();
-                    if (status != 200) {
-                        throw new IOException("Post failed");
-                    } else {
-                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                        String inputLine;
-                        while ((inputLine = in.readLine()) != null) {
-                            res.append(inputLine);
-                        }
-                        in.close();
-                    }
-
-                    conn.disconnect();
-
-                    JSONObject response = new JSONObject(res.toString());
-                    JSONArray doneArray = response.getJSONArray("done");
-                    JSONArray progressArray = response.getJSONArray("progress");
-
-                    result[0] = progressArray.length();
-                    result[1] = doneArray.length();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-        while (thread.isAlive()){}
-
-        return result;
-    }
-
-    public static byte[] parseParameter(Map<String, Object> params) {
-        StringBuilder postData = new StringBuilder();
-        byte[] postDataBytes = null;
-        try {
-            for (Map.Entry<String, Object> param : params.entrySet()) {
-                if (postData.length() != 0) postData.append('&');
-                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-                postData.append("=");
-                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-            }
-
-            postDataBytes = postData.toString().getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return postDataBytes;
-    }
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void initializeNewsList() throws IOException {
@@ -358,13 +298,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new NewsListViewDecoration(20)); // set border between news
 
-        NewYorkTimesApiClass nyTimesAPI = new NewYorkTimesApiClass();
-        List<ArticleInfo> autoLoadedArticleInfo = nyTimesAPI.loadArticleInfo();
-
+        if(loadedArticleInfo.size() == 0){
+            NewYorkTimesApiClass nyTimesAPI = new NewYorkTimesApiClass();
+            loadedArticleInfo = nyTimesAPI.loadArticleInfo();
+        }
         // add 3 article previews
-        for (ArticleInfo articleInfo : autoLoadedArticleInfo) {
+        for (ArticleInfo articleInfo : loadedArticleInfo) {
             Drawable thumbnailDrawable = new BitmapDrawable(getResources(), articleInfo.getThumbnailBitmap());
             adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr(), articleInfo.getUrlStr(), articleInfo.getThumbnailUrlStr());
         }
+
     }
 }
