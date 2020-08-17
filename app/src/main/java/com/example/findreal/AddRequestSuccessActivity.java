@@ -31,8 +31,6 @@ public class AddRequestSuccessActivity  extends AppCompatActivity {
         findViewById(R.id.imbtn_back_home).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

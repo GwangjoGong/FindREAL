@@ -16,6 +16,7 @@ public class ServicesActivity extends AppCompatActivity {
         setContentView(R.layout.services);
 
         ImageButton backButton = (ImageButton) findViewById(R.id.back);
+        backButton.setBackgroundResource(R.drawable.back_icon);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
