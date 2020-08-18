@@ -99,14 +99,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent userdata = getIntent();
+        email = userdata.getStringExtra("token");
         if(email == null){
-            Intent userdata = getIntent();
-            email = userdata.getStringExtra("token");
-            if(email == null){
-                Toast.makeText(this, "Invalid Access", Toast.LENGTH_LONG).show();
-                finish();
-            }
+            Toast.makeText(this, "Invalid Access", Toast.LENGTH_LONG).show();
+            finish();
         }
+
 
         if(Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
