@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -143,6 +142,8 @@ public class AddRequestActivity extends AppCompatActivity {
         byte[] byteArray = byteArrayOutputStream .toByteArray();
 
         int divQual = (int) Math.ceil(byteArray.length / threshold);
+
+        if(byteArray.length <= threshold) divQual = 1;
 
         Log.i("DIV", "nom : "+divQual);
 

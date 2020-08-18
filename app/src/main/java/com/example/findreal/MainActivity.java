@@ -15,11 +15,9 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.StrictMode;
 
 import android.util.Log;
@@ -44,7 +42,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,25 +51,49 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
 
     public static String email;
-    private View header;
     private DrawerLayout drawerLayout;
 
     private List<ArticleInfo> loadedArticleInfo = new ArrayList<>();
+
+    private Handler handler = new Handler();
+    private Runnable runnable;
+    private int delay = 5*1000; // 10 seconds
+
+    private PieChart requestPieChart;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
 
     @Override
     protected void onResume(){
         super.onResume();
-        Log.i("resume","resume");
-
         try {
             initializeRequests(email);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        handler.postDelayed( runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    initializeRequests(email);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.i("Handler", "10s");
+                handler.postDelayed(runnable, delay);
+            }
+        }, delay);
+
+
     }
 
+    @Override
+    protected void onPause() {
+        handler.removeCallbacks(runnable);
+        super.onPause();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,6 +233,31 @@ public class MainActivity extends AppCompatActivity {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void initializeRequests(String email) throws JSONException {
+
+        // PieChart
+        requestPieChart = (PieChart)findViewById(R.id.requests_piechart);
+
+        // Piechart for requests
+        requestPieChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RequestListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        requestPieChart.setUsePercentValues(true);
+        requestPieChart.getDescription().setEnabled(false);
+        requestPieChart.getLegend().setEnabled(false);
+        requestPieChart.setExtraOffsets(0,0,0,0);
+
+        requestPieChart.setTouchEnabled(false);
+
+        requestPieChart.setDrawHoleEnabled(false);
+        requestPieChart.setHoleColor(Color.WHITE);
+        requestPieChart.setTransparentCircleRadius(20f);
+
+
         // Requests
         TextView ongoingRequests   = (TextView) findViewById(R.id.ongoing_requests);
         TextView completedRequests = (TextView) findViewById(R.id.completed_requests);
@@ -242,29 +288,6 @@ public class MainActivity extends AppCompatActivity {
             completedRequests.setText(numOfCompletedRequests + " Completed Requests");
         }
 
-
-        // PieChart
-        PieChart requestPieChart = (PieChart)findViewById(R.id.requests_piechart);
-        // Piechart for requests
-
-        requestPieChart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RequestListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        requestPieChart.setUsePercentValues(true);
-        requestPieChart.getDescription().setEnabled(false);
-        requestPieChart.getLegend().setEnabled(false);
-        requestPieChart.setExtraOffsets(0,0,0,0);
-
-        requestPieChart.setTouchEnabled(false);
-
-        requestPieChart.setDrawHoleEnabled(false);
-        requestPieChart.setHoleColor(Color.WHITE);
-        requestPieChart.setTransparentCircleRadius(20f);
         ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
 
         yValues.add(new PieEntry(numOfCompletedRequests,""));
@@ -279,6 +302,8 @@ public class MainActivity extends AppCompatActivity {
         pieData.setValueTextSize(0f);
 
         requestPieChart.setData(pieData);
+        requestPieChart.invalidate();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -303,15 +328,59 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new NewsListViewDecoration(20)); // set border between news
 
-        if(loadedArticleInfo.size() == 0){
-            NewYorkTimesApiClass nyTimesAPI = new NewYorkTimesApiClass();
-            loadedArticleInfo = nyTimesAPI.loadArticleInfo();
+
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+        try{
+            String newsUrl = "http://3.35.41.92:3000/news";
+            Map<String, Object> data = new LinkedHashMap<>();
+            byte [] emptyBody = LoginActivity.parseParameter(data);
+            String result = LoginActivity.sendPost(emptyBody, newsUrl);
+
+            JSONObject resultJson = new JSONObject(result);
+            JSONArray docs = resultJson.getJSONArray("news");
+
+            for(int i = 0; i < 3; i ++){
+                JSONObject doc = docs.getJSONObject(i);
+                ArticleInfo info = new ArticleInfo();
+
+                info.setTitleStr(doc.getString("title"));
+                info.setUrlStr(doc.getString("urlArticle"));
+                String thumbnail = doc.getString("thumbnail");
+                if(thumbnail != null){
+                    info.setThumbnailUrlStr(thumbnail);
+                    Bitmap thumbnailArticle = NewYorkTimesApiClass.getBitmapFromURL(thumbnail);
+                    info.setThumbnailBitmap(thumbnailArticle);
+                }else{
+                    Drawable tempThumbnail = getDrawable(R.drawable.no_image);
+
+                    info.setThumbnailBitmap(((BitmapDrawable)tempThumbnail).getBitmap());
+                    info.setTitleStr("Empty Title");
+                    info.setUrlStr("empty");
+                }
+
+                articleInfoList.add(info);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            loadedArticleInfo = articleInfoList;
+            for (ArticleInfo articleInfo : loadedArticleInfo) {
+                Drawable thumbnailDrawable = new BitmapDrawable(getResources(), articleInfo.getThumbnailBitmap());
+                adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr(), articleInfo.getUrlStr(), articleInfo.getThumbnailUrlStr());
+            }
         }
+
+
+        //if(loadedArticleInfo.size() == 0){
+        //    NewYorkTimesApiClass nyTimesAPI = new NewYorkTimesApiClass();
+        //    loadedArticleInfo = nyTimesAPI.loadArticleInfo();
+        //}
         // add 3 article previews
-        for (ArticleInfo articleInfo : loadedArticleInfo) {
-            Drawable thumbnailDrawable = new BitmapDrawable(getResources(), articleInfo.getThumbnailBitmap());
-            adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr(), articleInfo.getUrlStr(), articleInfo.getThumbnailUrlStr());
-        }
+        //for (ArticleInfo articleInfo : loadedArticleInfo) {
+        //   Drawable thumbnailDrawable = new BitmapDrawable(getResources(), articleInfo.getThumbnailBitmap());
+        //    adapter.addItem(thumbnailDrawable, articleInfo.getTitleStr(), articleInfo.getUrlStr(), articleInfo.getThumbnailUrlStr());
+        //}
 
     }
 }
