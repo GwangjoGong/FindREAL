@@ -1,40 +1,103 @@
 package com.example.findreal;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoneListAdapter extends BaseAdapter {
-    List<DoneRequest> doneRequests = new ArrayList<DoneRequest>();
-    Context context;
+public class DoneListAdapter extends RecyclerView.Adapter<DoneListAdapter.DoneListViewHolder> {
+    List<DoneListItem> doneRequests = new ArrayList<DoneListItem>();
 
-    public DoneListAdapter(Context context) {this.context = context;}
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
 
-    public void add(DoneRequest dr){
-        this.doneRequests.add(dr);
-        notifyDataSetChanged();
+    private OnItemClickListener mListener = null;
+
+    public void setOnItemClickListener(DoneListAdapter.OnItemClickListener listener) {
+        this.mListener = listener;
+    }
+
+    class DoneListViewHolder extends RecyclerView.ViewHolder {
+        public ImageView imview_completed_request;
+        public TextView tv_request_result;
+        public ImageView imview_request_mark;
+
+
+        DoneListViewHolder(View itemView) {
+            super(itemView);
+
+            imview_completed_request = itemView.findViewById(R.id.imview_completed_request);
+            tv_request_result = itemView.findViewById(R.id.tv_request_result);
+            imview_request_mark = itemView.findViewById(R.id.imview_request_mark);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(mListener != null){
+                            mListener.onItemClick(v, pos);
+                        }
+                    }
+                }
+            });
+        }
+
+        void onBind(DoneListItem item) {
+            byte[] decodedString = Base64.decode(item.getImage(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imview_completed_request.setImageBitmap(decodedByte);
+
+            double real = item.getReal();
+            double fake = item.getFake();
+            String error = item.getError();
+
+            if (error != "null") {
+                tv_request_result.setText("Unanalyzable");
+                imview_request_mark.setVisibility(View.INVISIBLE);
+            } else if (real - fake >= 0.25) {
+                tv_request_result.setText("Highly Trustful");
+                imview_request_mark.setImageResource(R.drawable.request_good);
+            } else if (real - fake >= 0.0) {
+                tv_request_result.setText("Slightly Trustful");
+                imview_request_mark.setImageResource(R.drawable.request_good);
+            } else if (real - fake >= -0.25) {
+                tv_request_result.setText("Slightly Suspicious");
+                imview_request_mark.setImageResource(R.drawable.request_bad);
+            } else {
+                tv_request_result.setText("Highly Suspicious");
+                imview_request_mark.setImageResource(R.drawable.request_bad);
+            }
+        }
+
+
+    }
+
+    public DoneListAdapter() {
+    }
+
+
+    @NonNull
+    @Override
+    public DoneListAdapter.DoneListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.completed_request, parent, false);
+        return new DoneListViewHolder(view);
     }
 
     @Override
-    public int getCount() {
-        return doneRequests.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return doneRequests.get(position);
+    public void onBindViewHolder(@NonNull DoneListAdapter.DoneListViewHolder holder, int position) {
+        holder.onBind(doneRequests.get(position));
     }
 
     @Override
@@ -43,50 +106,23 @@ public class DoneListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup){
-        DoneListViewHolder holder = new DoneListViewHolder();
-        LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        DoneRequest dr = doneRequests.get(position);
+    public int getItemCount() {
+        return doneRequests.size();
+    }
 
-        convertView = messageInflater.inflate(R.layout.completed_request, null);
-        holder.imview_completed_request = convertView.findViewById(R.id.imview_completed_request);
-        holder.tv_request_result = convertView.findViewById(R.id.tv_request_result);
-        holder.imview_request_mark = convertView.findViewById(R.id.imview_request_mark);
-        convertView.setTag(holder);
+    //@Override
+    public Object getItem(int position) {
+        return doneRequests.get(position);
+    }
 
-        byte[] decodedString = Base64.decode(dr.getImage(), Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,decodedString.length);
-        holder.imview_completed_request.setImageBitmap(decodedByte);
+    public void addItem(String image, double real, double fake, String error){
+        DoneListItem item = new DoneListItem();
 
-        double real = dr.getReal();
-        double fake = dr.getFake();
-        String error = dr.getError();
+        item.setImage(image);
+        item.setReal(real);
+        item.setFake(fake);
+        item.setError(error);
 
-        if(error != "null"){
-            holder.tv_request_result.setText("Unanalyzable");
-            holder.imview_request_mark.setVisibility(View.INVISIBLE);
-        }
-        else if(real-fake >= 0.25){
-            holder.tv_request_result.setText("Highly Trustful");
-            holder.imview_request_mark.setImageResource(R.drawable.request_good);
-        }else if(real-fake >= 0.0){
-            holder.tv_request_result.setText("Slightly Trustful");
-            holder.imview_request_mark.setImageResource(R.drawable.request_good);
-        }else if(real-fake >= -0.25){
-            holder.tv_request_result.setText("Slightly Suspicious");
-            holder.imview_request_mark.setImageResource(R.drawable.request_bad);
-        }else{
-            holder.tv_request_result.setText("Highly Suspicious");
-            holder.imview_request_mark.setImageResource(R.drawable.request_bad);
-        }
-
-        return convertView;
+        doneRequests.add(item);
     }
 }
-
-class DoneListViewHolder {
-    public ImageView imview_completed_request;
-    public TextView tv_request_result;
-    public ImageView imview_request_mark;
-}
-

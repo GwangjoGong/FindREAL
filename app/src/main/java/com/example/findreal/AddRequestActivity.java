@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -136,17 +135,23 @@ public class AddRequestActivity extends AppCompatActivity {
 
     private String toBase64(Bitmap bitmap) {
         int quality = 100;
+        int threshold = 100000;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream .toByteArray();
 
-        while (byteArray.length > 100000){
-            quality -= 5;
-            byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
-            byteArray = byteArrayOutputStream.toByteArray();
-        }
+        int divQual = (int) Math.ceil(byteArray.length / threshold);
+
+        if(byteArray.length <= threshold) divQual = 1;
+
+        Log.i("DIV", "nom : "+divQual);
+
+
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, Math.round(quality/divQual), byteArrayOutputStream);
+        byteArray = byteArrayOutputStream.toByteArray();
+
 
         Log.i("Bytes", "size : "+byteArray.length);
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
